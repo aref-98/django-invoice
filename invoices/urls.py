@@ -3,12 +3,12 @@ from .routers import SlashOptionalRouter
 
 from .views.person_views import PersonViewSet
 
-from .views.invoice_views import InvocieViewSet
+from .views.invoice_views import InvoiceViewSet
 
 
 router = SlashOptionalRouter()
 router.register(r'persons', PersonViewSet)
-router.register(r'invoices', InvocieViewSet)
+router.register(r'invoices', InvoiceViewSet, basename='invoice')
 
 urlpatterns = [
     path('api/', include(router.urls)),
