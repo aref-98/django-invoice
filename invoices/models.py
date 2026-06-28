@@ -25,3 +25,15 @@ class Person(models.Model):
     )
     note = models.TextField(blank=True, null=True)
     hidden = models.BooleanField(default=False, db_index=True)
+
+
+class Invoice(models.Model):
+    invoiceNumber = models.IntegerField(db_index=True)
+    issued = models.DateField()
+    dueDate = models.DateField()
+    product = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    vat = models.IntegerField(default=21)
+    note = models.TextField(blank=True, null=True)
+    buyer = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True, related_name='purchases')
+    seller = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True, related_name='sales')
